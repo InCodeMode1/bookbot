@@ -3,21 +3,32 @@ with open("books/frankenstein.txt") as f:
 
 wc = file_contents.split()
 
-
 def word_count(words: list):
-    print(len(words))
+    return len(words)
 
 
-def char_count(letters: str):
+def letter_count(letters):
     lc = {}
-    for character in letters:
-        if character.lower() in lc:
-            lc[character.lower()] += 1
-        else:
-            lc[character.lower()] = 1
+    for letter in letters:
+        if letter.isalpha():
+            if letter.lower() in lc:
+                lc[letter.lower()] += 1
+            else:
+                lc[letter.lower()] = 1
     return lc
 
 
+def report(file , fn):
+    
+    print(f"--- Begin report of {fn.name} ---")
+    print(f"{word_count(wc)} words found in document")
 
-word_count(wc)
-print(char_count(file_contents))
+    letters = letter_count(file)
+    sort_letters = list(letters)
+    sort_letters.sort()
+    
+    for letter in sort_letters:
+        print(f"The {letter} character has been found {letters[letter]} times")
+
+
+report(file_contents, f)
